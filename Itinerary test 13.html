@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 12px 16px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab.active {
+            border-bottom: 3px solid #007aff;
+            color: #007aff;
+        }
+        .content {
+            padding: 16px;
+        }
+        .event {
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .label {
+            font-weight: 600;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab(event,'overview')">🇮🇹 Italy Overview</div>
+    <div class="tab" onclick="showTab(event,'d613')">6/13</div>
+    <div class="tab" onclick="showTab(event,'d614')">6/14</div>
+</div>
+
+<div class="content">
+    <!-- Country Overview Tab -->
+    <div id="overview" class="tabContent" style="display:block">
+        <h2>🇮🇹 Italy Overview</h2>
+        <hr>
+        <p><strong>Italy:</strong> 8 Nights</p>
+        <p><strong>Rome:</strong> 5 Nights</p>
+        <p>Hotel: Tucci's B&B</p>
+        <hr>
+        <p><strong>Florence:</strong> 2 Nights</p>
+        <p>Hotel: Abaco</p>
+        <hr>
+        <p><strong>Venice:</strong> 1 Night</p>
+        <p>Hotel: Ca' Rialto House</p>
+    </div>
+
+    <!-- Event Details for 6/13 -->
+    <div id="d613" class="tabContent" style="display:none">
+        <h2>Saturday, 6/13</h2>
+        <hr>
+        {% for event in events['6/13'] %}
+        <div class="event">
+            <div class="label">Time:</div> {{ event['Time'] }}
+            <div class="label">Activity:</div> {{ event['Activity'] }}
+            <div class="label">Travel:</div> {{ event['Travel'] }}
+            <div class="label">Comment:</div> {{ event['Comment'] }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Event Details for 6/14 -->
+    <div id="d614" class="tabContent" style="display:none">
+        <h2>Sunday, 6/14</h2>
+        <hr>
+        {% for event in events['6/14'] %}
+        <div class="event">
+            <div class="label">Time:</div> {{ event['Time'] }}
+            <div class="label">Activity:</div> {{ event['Activity'] }}
+            <div class="label">Travel:</div> {{ event['Travel'] }}
+            <div class="label">Comment:</div> {{ event['Comment'] }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function showTab(evt, id) {
+    document.querySelectorAll('.tabContent').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+    document.getElementById(id).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+}
+</script>
+
+</body>
+</html>
