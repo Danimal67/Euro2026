@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  background: #111;
+}
+
+.tab {
+  padding: 12px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.tab.active {
+  opacity: 1;
+  border-bottom: 2px solid #007aff;
+}
+
+/* Day container */
+.day {
+  display: none;
+  padding: 10px;
+}
+
+.day.active {
+  display: block;
+}
+
+/* Cards */
+.card {
+  background: #111;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+/* Text */
+.label {
+  color: #007aff;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  margin-top: 8px;
+}
+
+.value {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  margin-bottom: 6px;
+}
+
+.value.time {
+  font-weight: 600;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="showDay(0)">Saturday 6/13</div>
+  <div class="tab" onclick="showDay(1)">Sunday 6/14</div>
+</div>
+
+<!-- SATURDAY (UNCHANGED STRUCTURE) -->
+<div class="day active">
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Taxi to airport</div>
+
+    <div class="label">Travel</div>
+    <div class="value">30 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(Fly to Rome via Munich overnight)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">SD Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Flight: LH467 (Terminal 2)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:15pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Fly to Munich</div>
+
+    <div class="label">Travel</div>
+    <div class="value">11hrs</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 29 H,J,K</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Lufthansa.  Flight: LH467 (Terminal 2)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Munich Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Res#: 8OWJNY</div>
+  </div>
+
+</div>
+
+<!-- SUNDAY (APPENDED ONLY) -->
+<div class="day">
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1:25PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Layover in Munich</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">3hrs</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4:35PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Fly to Rome</div>
+    <div class="label">Travel</div>
+    <div class="value">1hr 35min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 18 D, E, F</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Flight: LH 4166 (Terminal 2)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Rome</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6:15pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Land in Rome!</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7pm-ish</div>
+    <div class="label">Activity</div>
+    <div class="value">Train to Main Station (Roma Termini)</div>
+    <div class="label">Travel</div>
+    <div class="value">35 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Roma  Airport (FCO)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Nonstop: Exit Roma Termini</div>
+    <div class="label">Comments</div>
+    <div class="value">(Leonardo Express @ station)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Metro to Hotel</div>
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Metro A</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Manzoni (1 stop)</div>
+    <div class="label">Comments</div>
+    <div class="value">3 min walk</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:45pm</div>
+    <div class="label">Activity</div>
+    <div class="value">HOTEL: Tucci's B&amp;B (5n)</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">info@tuccihouse.it</div>
+    <div class="label">Directions Start</div>
+    <div class="value">PH: +39 366 3375640</div>
+    <div class="label">Directions End</div>
+    <div class="value">Via Statilia, 3. W/A 393395782650</div>
+    <div class="label">Comments</div>
+    <div class="value">Reservation: 53857541</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Kebab/pizza?</div>
+    <div class="label">Travel</div>
+    <div class="value">Across street</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">(Sunsets @ 8:47pm)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Colosseum Night View</div>
+    <div class="label">Travel</div>
+    <div class="value">13 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Photo op</div>
+    <div class="label">Directions Start</div>
+    <div class="value">#51 around corner</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Colosseo (3 stops)</div>
+    <div class="label">Comments</div>
+    <div class="value">up outside stairs for view</div>
+  </div>
+
+</div>
+
+<script>
+function showDay(index) {
+  document.querySelectorAll('.day').forEach((d,i)=>{
+    d.classList.toggle('active', i === index);
+  });
+
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    t.classList.toggle('active', i === index);
+  });
+}
+</script>
+
+</body>
+</html>
