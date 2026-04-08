@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerary</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #1a1625;
+     -webkit-text-size-adjust: 100%;
+    }
+
+    /* TABS */
+    .tabs {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #1a1625;
+  max-width: 100%;
+}
+
+.tabs button {
+  flex: 0 0 auto;
+  padding: 9px 18px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.tabs button.active {
+  background: royalblue;
+  color: white;
+  border-radius: 20px;
+}
+
+    /* DAY CONTAINER */
+    .day {
+      padding: 12px;
+       display: none;
+    }
+
+    h2 {
+  color: royalblue;
+  margin: 10px;
+  font-weight: normal;
+  font-size: 25px;
+}
+
+    /* CARDS */
+    .card {
+  background: #000000;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+}
+
+    /* TEXT STYLING */
+    .time {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.label {
+  font-size: 20px;
+  color: royalblue;
+  font-weight: normal;
+  display: block;
+  margin-top: 1x;     /* space BEFORE new section */
+  margin-bottom: 1px;   /* keeps it close to its value */
+}
+
+.value {
+  font-size: 25px;
+  color: #ffffff;
+  margin-bottom: 25px;   /* space AFTER the pair */
+}
+  </style>
+
+
+
+  <script>
+    function showDay(dayId, btn) {
+      const days = document.querySelectorAll('.day');
+      const buttons = document.querySelectorAll('.tabs button');
+
+      days.forEach(d => d.style.display = 'none');
+      buttons.forEach(b => b.classList.remove('active'));
+
+      document.getElementById(dayId).style.display = 'block';
+      btn.classList.add('active');
+    }
+  </script>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="active" onclick="showDay('italy', this)">🇮🇹 ITALY</button>
+  <button onclick="showDay('sat-6-13', this)">Saturday 6/13</button>
+  <button onclick="showDay('sun-6-14', this)">Sunday 6/14</button>
+  <button onclick="showDay('mon-6-15', this)">Monday 6/15</button>
+</div>
+
+
+<!-- ITALY OVERVIEW -->
+<div class="day" id="italy" style="display:block;">
+
+
+  <div class="card">
+
+    <div class="label">Country</div>
+    <div class="value">🇮🇹 Italy</div>
+
+    <div class="label">Total Nights</div>
+    <div class="value">8 Nights</div>
+
+<!-- CITY AND HOTEL OVERVIEW -->
+    <div class="label">Cities & Hotels</div>
+<div class="value">
+  Rome: 5 Nights<br>
+  &nbsp;&nbsp;Hotel: Tucci's B&B<br><br>
+
+  Florence: 2 Nights<br>
+  &nbsp;&nbsp;Hotel: Abaco<br><br>
+
+  Venice: 1 Night<br>
+  &nbsp;&nbsp;Hotel: Ca' Rialto House
+</div>
+
+
+  </div>
+
+</div>
+
+
+<!-- SATURDAY -->
+<div class="day" id="sat-6-13">
+
+  <h2>Saturday 6/13</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Taxi to airport</div>
+
+    <div class="label">Travel</div>
+    <div class="value">30 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(Fly to Rome via Munich overnight)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">SD Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Flight: LH467 (Terminal 2)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:15pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Fly to Munich</div>
+
+    <div class="label">Travel</div>
+    <div class="value">11hrs</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 29 H,J,K</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Lufthansa.  Flight: LH467 (Terminal 2)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Munich Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Res#: 8OWJNY</div>
+  </div>
+
+</div>
+
+<!-- SUNDAY -->
+<div class="day" id="sun-6-14" style="display:none;">
+
+  <h2>Sunday 6/14</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1:25PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Layover in Munich</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">3hrs</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4:35PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Fly to Rome</div>
+    <div class="label">Travel</div>
+    <div class="value">1hr 35min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 18 D, E, F</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Flight: LH 4166 (Terminal 2)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Rome</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6:15pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Land in Rome!</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7pm-ish</div>
+    <div class="label">Activity</div>
+    <div class="value">Train to Main Station (Roma Termini)</div>
+    <div class="label">Travel</div>
+    <div class="value">35 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Roma  Airport (FCO)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Nonstop: Exit Roma Termini</div>
+    <div class="label">Comments</div>
+    <div class="value">(Leonardo Express @ station)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Metro to Hotel</div>
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Metro A</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Manzoni (1 stop)</div>
+    <div class="label">Comments</div>
+    <div class="value">3 min walk</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:45pm</div>
+    <div class="label">Activity</div>
+    <div class="value">HOTEL: Tucci's B&amp;B (5n)</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">info@tuccihouse.it</div>
+    <div class="label">Directions Start</div>
+    <div class="value">PH: +39 366 3375640</div>
+    <div class="label">Directions End</div>
+    <div class="value">Via Statilia, 3. W/A 393395782650</div>
+    <div class="label">Comments</div>
+    <div class="value">Reservation: 53857541</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Kebab/pizza?</div>
+    <div class="label">Travel</div>
+    <div class="value">Across street</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">(Sunsets @ 8:47pm)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Colosseum Night View</div>
+    <div class="label">Travel</div>
+    <div class="value">13 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Photo op</div>
+    <div class="label">Directions Start</div>
+    <div class="value">#51 around corner</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Colosseo (3 stops)</div>
+    <div class="label">Comments</div>
+    <div class="value">up outside stairs for view</div>
+  </div> 
+ 
+</div>
+
+
+<!-- MONDAY -->
+<div class="day" id="mon-6-15" style="display:none;">
+
+  <h2>Monday 6/15</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Breakfast: Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:10/8:18am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Bike Tour</div>
+
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Leave by 8:00am!</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">U3 stop. Manzoni (Ma) - By Milton Hotel</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Colosseo/Salvi N. (3 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">5 min walk to bus stop</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bike Tour: romastarbike.com</div>
+
+    <div class="label">Travel</div>
+    <div class="value">2 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">5 hrs</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Around corner</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Via dei SS. Quattro, 58</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Rsv#: SBIKE-75875522</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">2:15pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Lunch: Caffè Martini ??</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(Across from Colosseum)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(or gelato/pizza snack?)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">3:20pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Capuchin Crypt</div>
+
+    <div class="label">Travel</div>
+    <div class="value">20 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">#85 (5 min walk N. of Colosseum)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Barberini (8 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">OR 3:32pm or 3:39pm</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4pm-ish</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Capuchin Crypt</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Subway to San Giovanni</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Barberini: M:A (towards Anagnina)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: San Giovanni (5 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(Subway every 3 min)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:20pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">San Giovanni / Holy Stairs / Obelisk</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Closes at 6:30pm</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6:30pm-ish</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk back to hotel or Aquaductus Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Trattoria Pizzeria Porta Maggiore</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Past Emona Aquaductus</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Around corner</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+</div>
+
+
+</body>
+</html>
