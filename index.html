@@ -142,16 +142,139 @@
 <body>
 
 <div class="tabs">
-  <button class="active" onclick="showDay('italy', this)">🇮🇹 ITALY</button>
+  <button class="active" onclick="showDay('overview', this)">🌍 Overview</button>
+  <button onclick="showDay('italy', this)">🇮🇹 ITALY</button>
   <button onclick="showDay('sat-6-13', this)">Saturday 6/13</button>
   <button onclick="showDay('sun-6-14', this)">Sunday 6/14</button>
   <button onclick="showDay('mon-6-15', this)">Monday 6/15</button>
   <button onclick="showDay('tue-6-16', this)">Tuesday 6/16</button>
 </div>
 
+<!-- OVERVIEW -->
+<div class="day" id="overview" style="display:block;">
 
-<!-- ITALY OVERVIEW -->
-<div class="day" id="italy" style="display:block;">
+ <h2>2026 Rock Family European Vacation: 19 Nights!</h2>
+
+  <!-- ITALY -->
+  <div class="card">
+
+    <div class="label">Country</div>
+    <div class="value">🇮🇹 Italy</div>
+
+    <div class="label">Total Nights</div>
+    <div class="value">8 Nights</div>
+
+    <div class="label">Cities & Hotels</div>
+    <div class="value">
+      Rome: 5 Nights<br>
+      &nbsp;&nbsp;Hotel: Tucci's B&amp;B<br><br>
+
+      Florence: 2 Nights<br>
+      &nbsp;&nbsp;Hotel: Abaco<br><br>
+
+      Venice: 1 Night<br>
+      &nbsp;&nbsp;Hotel: Ca' Rialto House
+    </div>
+
+  </div>
+
+  <!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- SLOVENIA -->
+<div class="card">
+
+  <div class="label">Country</div>
+  <div class="value">🇸🇮 Slovenia</div>
+
+  <div class="label">Total Nights</div>
+  <div class="value">2 Nights</div>
+
+  <div class="label">Cities & Hotels</div>
+  <div class="value">
+    Ljubljana: 2 Nights<br>
+    &nbsp;&nbsp;Hotel: Best Western
+  </div>
+
+</div>
+
+
+ <!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- AUSTRIA -->
+<div class="card">
+
+  <div class="label">Country</div>
+  <div class="value">🇦🇹 Austria</div>
+
+  <div class="label">Total Nights</div>
+  <div class="value">2 Nights</div>
+
+  <div class="label">Cities & Hotels</div>
+  <div class="value">
+    Salzburg: 2 Nights<br>
+    &nbsp;&nbsp;Hotel: Kaiserbräu
+  </div>
+
+</div>
+
+
+<!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- GERMANY -->
+<div class="card">
+
+  <div class="label">Country</div>
+  <div class="value">🇩🇪 Germany</div>
+
+  <div class="label">Total Nights</div>
+  <div class="value">3 Nights</div>
+
+  <div class="label">Cities & Hotels</div>
+  <div class="value">
+    Munich: 1 Night<br>
+    &nbsp;&nbsp;Hotel: Kings<br><br>
+
+    Rothenburg: 1 Night<br>
+    &nbsp;&nbsp;Hotel: Goldener Hirsch<br><br>
+
+    Fussen: 1 Night<br>
+    &nbsp;&nbsp;Hotel: Sonne
+  </div>
+
+</div>
+
+<!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+<!-- SWITZERLAND -->
+<div class="card">
+
+  <div class="label">Country</div>
+  <div class="value">🇨🇭 Switzerland</div>
+
+  <div class="label">Total Nights</div>
+  <div class="value">4 Nights</div>
+
+  <div class="label">Cities & Hotels</div>
+  <div class="value">
+    Lauterbrunnen: 3 Nights<br>
+    &nbsp;&nbsp;Hotel: Staubbach<br><br>
+
+    Zurich: 1 Night<br>
+    &nbsp;&nbsp;Hotel: Limmathof
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+
+<div class="day" id="italy" style="display:none;">
 
 
   <div class="card">
@@ -182,7 +305,7 @@
 
 
 <!-- SATURDAY -->
-<div class="day" id="sat-6-13">
+<div class="day" id="sat-6-13" style="display:none;">
 
   <h2>Saturday 6/13</h2>
 
@@ -624,7 +747,7 @@
 
   <div class="card">
     <div class="label">Time</div>
-    <div class="value time">7:30</div>
+    <div class="value time">7:30am</div>
 
     <div class="label">Activity</div>
     <div class="value">Breakfast: Hotel</div>
