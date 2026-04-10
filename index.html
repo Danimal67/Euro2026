@@ -1,0 +1,3780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerary</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #221c30;
+     -webkit-text-size-adjust: 100%;
+    }
+
+    /* TABS */
+    .tabs {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #221c30;
+  max-width: 100%;
+}
+
+.tabs button {
+  flex: 0 0 auto;
+  padding: 9px 18px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.tabs button.active {
+  background: royalblue;
+  color: white;
+  border-radius: 20px;
+}
+
+    /* DAY CONTAINER */
+    .day {
+      padding: 12px;
+       display: none;
+    }
+
+    h2 {
+  color: #7bb3ff;
+  margin: 10px;
+  font-weight: normal;
+  font-size: 25px;
+}
+
+    /* CARDS */
+    .card {
+  background: #000000;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+}
+
+    /* TEXT STYLING */
+    .time {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.label {
+  font-size: 20px;
+  color: #7bb3ff;
+  font-weight: normal;
+  display: block;
+  margin-top: 1x;     /* space BEFORE new section */
+  margin-bottom: 1px;   /* keeps it close to its value */
+}
+
+.value {
+  font-size: 25px;
+  color: #ffffff;
+  margin-bottom: 25px;   /* space AFTER the pair */
+}
+  </style>
+
+
+
+  <script>
+
+  function showDay(dayId, btn) {
+    const days = document.querySelectorAll('.day');
+    const buttons = document.querySelectorAll('.tabs button');
+
+    // Hide all days
+    days.forEach(d => d.style.display = 'none');
+
+    // Remove active from all tabs
+    buttons.forEach(b => b.classList.remove('active'));
+
+    // Show selected day
+    document.getElementById(dayId).style.display = 'block';
+
+    // Highlight active tab
+    btn.classList.add('active');
+
+    // SAVE selected tab
+    localStorage.setItem('selectedDay', dayId);
+
+    // Reset scroll when switching days
+    window.scrollTo(0, 0);
+  }
+
+  // Save scroll position
+  window.addEventListener('scroll', () => {
+    localStorage.setItem('scrollPosition', window.scrollY);
+  });
+
+  // Restore tab + scroll on load
+  window.addEventListener('load', () => {
+    const savedDay = localStorage.getItem('selectedDay');
+    const savedScroll = localStorage.getItem('scrollPosition');
+
+    if (savedDay) {
+      const button = document.querySelector(`button[onclick*="${savedDay}"]`);
+      if (button) {
+        showDay(savedDay, button);
+      }
+    }
+
+    if (savedScroll) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScroll));
+      }, 100);
+    }
+  });
+</script>
+
+  
+</head>
+<body>
+
+<div class="tabs">
+  <button class="active" onclick="showDay('overview', this)">🌍 Overview</button>
+  <button onclick="showDay('italy', this)">🇮🇹 Italy</button>
+  <button onclick="showDay('sat-6-13', this)">Saturday 6/13</button>
+  <button onclick="showDay('sun-6-14', this)">Sunday 6/14</button>
+  <button onclick="showDay('mon-6-15', this)">Monday 6/15</button>
+  <button onclick="showDay('tue-6-16', this)">Tuesday 6/16</button>
+  <button onclick="showDay('wed-6-17', this)">Wednesday 6/17</button>
+  <button onclick="showDay('thu-6-18', this)">Thursday 6/18</button>
+  <button onclick="showDay('fri-6-19', this)">Friday 6/19</button>
+  <button onclick="showDay('sat-6-20', this)">Saturday 6/20</button>
+  <button onclick="showDay('sun-6-21', this)">Sunday 6/21</button>
+  <button onclick="showDay('slovenia', this)">🇸🇮 Slovenia</button>
+  <button onclick="showDay('mon-6-22', this)">Monday 6/22</button>
+  <button onclick="showDay('tue-6-23', this)">Tuesday 6/23</button>
+  <button onclick="showDay('austria', this)">🇦🇹 Austria</button>
+  <button onclick="showDay('wed-6-24', this)">Wednesday 6/24</button>
+  <button onclick="showDay('thu-6-25', this)">Thursday 6/25</button>
+  <button onclick="showDay('germany', this)">🇩🇪 Germany</button>
+  <button onclick="showDay('fri-6-26', this)">Friday 6/26</button>
+  <button onclick="showDay('sat-6-27', this)">Saturday 6/27</button>
+  <button onclick="showDay('sun-6-28', this)">Sunday 6/28</button>
+  <button onclick="showDay('switzerland', this)">🇨🇭 Switzerland</button>
+  <button onclick="showDay('mon-6-29', this)">Monday 6/29</button>
+  <button onclick="showDay('tue-6-30', this)">Tuesday 6/30</button>
+  <button onclick="showDay('wed-7-1', this)">Wednesday 7/1</button>
+  <button onclick="showDay('thu-7-2', this)">Thursday 7/2</button>
+  <button onclick="showDay('fri-7-3', this)">Friday 7/3</button>
+
+
+
+</div>
+
+<!-- OVERVIEW -->
+<div class="day" id="overview" style="display:block;">
+
+<h2 style="text-align:center; font-size:28px; line-height:1.2;">
+  2026 Rock Family Vacation<br>
+  19 European Nights!
+</h2>
+
+  <!-- ITALY -->
+  <div class="card">
+
+    <div class="value" style="font-size:30px; font-weight:bold;">
+  🇮🇹 Italy
+</div>
+
+
+    <div class="value">8 Nights: (6/14 - 6/22)</div>
+
+    <div class="label"> Cities & Hotels:</div>
+    <div class="value"><BR>
+      &#8226;&nbsp;Rome: 5 Nights<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Tucci's B&amp;B<br><br>
+
+      &#8226;&nbsp;Florence: 2 Nights<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Abaco<br><br>
+
+      &#8226;&nbsp;Venice: 1 Night<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Ca' Rialto House
+    </div>
+
+  </div>
+
+  <!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- SLOVENIA -->
+<div class="card">
+
+    <div class="value" style="font-size:30px; font-weight:bold;">
+  🇸🇮 Slovenia
+</div>
+
+  <div class="value">2 Nights: (6/22 - 6/24)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Ljubljana: 2 Nights<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Best Western
+  </div>
+
+</div>
+
+
+ <!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- AUSTRIA -->
+<div class="card">
+
+  <div
+ class="value" style="font-size:30px; font-weight:bold;">
+  🇦🇹 Austria
+</div>
+
+  <div class="value">2 Nights: (6/24 - 6/26)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Salzburg: 2 Nights<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Kaiserbräu
+  </div>
+
+</div>
+
+
+<!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+
+<!-- GERMANY -->
+<div class="card">
+
+ <div class="value" style="font-size:30px; font-weight:bold;">
+  🇩🇪 Germany
+</div>
+
+  <div class="value">3 Nights: (6/26 - 6/29)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Munich: 1 Night<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Kings<br><br>
+
+    &#8226;&nbsp;Rothenburg: 1 Night<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Goldener Hirsch<br><br>
+
+    &#8226;&nbsp;Fussen: 1 Night<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Sonne
+  </div>
+
+</div>
+
+<!-- ADD NEXT COUNTRY CARD BELOW THIS LINE -->
+
+<!-- SWITZERLAND -->
+<div class="card">
+
+<div class="value" style="font-size:30px; font-weight:bold;">
+  🇨🇭 Switzerland
+</div>
+
+  <div class="value">4 Nights: (6/29 - 7/3)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Lauterbrunnen: 3 Nights<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Staubbach<br><br>
+
+    &#8226;&nbsp;Zurich: 1 Night<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Limmathof
+  </div>
+
+</div>
+
+
+</div>
+
+  <!-- ITALY -->
+<div class="day" id="italy" style="display:none;">
+
+
+  <div class="card">
+
+<div class="value" style="font-size:30px; font-weight:bold;">
+  🇮🇹 Italy
+</div>
+
+    <div class="value">8 Nights: (6/14 - 6/22)</div>
+
+    <div class="label">Cities & Hotels:</div>
+    <div class="value">
+      &#8226;&nbsp;Rome: 5 Nights<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Tucci's B&amp;B<br><br>
+
+      &#8226;&nbsp;Florence: 2 Nights<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Abaco<br><br>
+
+      &#8226;&nbsp;Venice: 1 Night<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Ca' Rialto House
+    
+</div>
+
+
+  </div>
+
+</div>
+
+
+<!-- SATURDAY -->
+<div class="day" id="sat-6-13" style="display:none;">
+
+  <h2>Saturday 6/13<br>&nbsp&nbspSan Diego to Munich Layover</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Taxi to airport</div>
+
+    <div class="label">Travel</div>
+    <div class="value">30 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(Fly to Rome via Munich overnight)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">SD Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Flight: LH467 (Terminal 2)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:15pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Fly to Munich</div>
+
+    <div class="label">Travel</div>
+    <div class="value">11hrs</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 29 H,J,K</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Lufthansa.  Flight: LH467 (Terminal 2)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Munich Airport</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Res#: 8OWJNY</div>
+  </div>
+
+</div>
+
+<!-- SUNDAY -->
+<div class="day" id="sun-6-14" style="display:none;">
+
+  <h2>Sunday 6/14<BR>
+       &nbsp&nbspMunich to Rome</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1:25PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Layover in Munich</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">3hrs</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4:35PM</div>
+    <div class="label">Activity</div>
+    <div class="value">Fly to Rome</div>
+    <div class="label">Travel</div>
+    <div class="value">1hr 35min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Seats 18 D, E, F</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Flight: LH 4166 (Terminal 2)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Rome</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6:15pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Land in Rome!</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7pm-ish</div>
+    <div class="label">Activity</div>
+    <div class="value">Train to Main Station (Roma Termini)</div>
+    <div class="label">Travel</div>
+    <div class="value">35 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Roma  Airport (FCO)</div>
+    <div class="label">Directions End</div>
+    <div class="value">Nonstop: Exit Roma Termini</div>
+    <div class="label">Comments</div>
+    <div class="value">(Leonardo Express @ station)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Metro to Hotel</div>
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">Metro A</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Manzoni (1 stop)</div>
+    <div class="label">Comments</div>
+    <div class="value">3 min walk</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:45pm</div>
+    <div class="label">Activity</div>
+    <div class="value">HOTEL: Tucci's B&amp;B (5n)</div>
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+    <div class="label">Spend Time</div>
+    <div class="value">info@tuccihouse.it</div>
+    <div class="label">Directions Start</div>
+    <div class="value">PH: +39 366 3375640</div>
+    <div class="label">Directions End</div>
+    <div class="value">Via Statilia, 3. W/A 393395782650</div>
+    <div class="label">Comments</div>
+    <div class="value">Reservation: 53857541</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:30pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Kebab/pizza?</div>
+    <div class="label">Travel</div>
+    <div class="value">Across street</div>
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+    <div class="label">Comments</div>
+    <div class="value">(Sunsets @ 8:47pm)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9pm</div>
+    <div class="label">Activity</div>
+    <div class="value">Colosseum Night View</div>
+    <div class="label">Travel</div>
+    <div class="value">13 min</div>
+    <div class="label">Spend Time</div>
+    <div class="value">Photo op</div>
+    <div class="label">Directions Start</div>
+    <div class="value">#51 around corner</div>
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Colosseo (3 stops)</div>
+    <div class="label">Comments</div>
+    <div class="value">up outside stairs for view</div>
+  </div> 
+ 
+</div>
+
+
+<!-- MONDAY -->
+<div class="day" id="mon-6-15" style="display:none;">
+
+  <h2>Monday 6/15<BR> &nbsp&nbspRome</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Breakfast: Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:10/8:18am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Bike Tour</div>
+
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Leave by 8:00am!</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">U3 stop. Manzoni (Ma) - By Milton Hotel</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Colosseo/Salvi N. (3 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">5 min walk to bus stop</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bike Tour: romastarbike.com</div>
+
+    <div class="label">Travel</div>
+    <div class="value">2 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">5 hrs</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Around corner</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Via dei SS. Quattro, 58</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Rsv#: SBIKE-75875522</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">2:15pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Lunch: Caffè Martini ??</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(Across from Colosseum)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(or gelato/pizza snack?)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">3:20pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Capuchin Crypt</div>
+
+    <div class="label">Travel</div>
+    <div class="value">20 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">#85 (5 min walk N. of Colosseum)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Barberini (8 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">OR 3:32pm or 3:39pm</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4pm-ish</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Capuchin Crypt</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Subway to San Giovanni</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Barberini: M:A (towards Anagnina)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: San Giovanni (5 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(Subway every 3 min)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:20pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">San Giovanni / Holy Stairs / Obelisk</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Closes at 6:30pm</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6:30pm-ish</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk back to hotel or Aquaductus Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Trattoria Pizzeria Porta Maggiore</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Past Emona Aquaductus</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Around corner</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+</div>
+
+
+
+<!-- TUESDAY -->
+<div class="day" id="tue-6-16" style="display:none;">
+
+  <h2>Tuesday 6/16<BR> &nbsp&nbspRome</h2>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">7:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Breakfast: Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time"><strong>7:52am</strong></div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Colosseum</div>
+
+    <div class="label">Travel</div>
+    <div class="value">7 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">(Leave by 7:40am!)</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Viale Manzoni Str. Bus 3 or 3L</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: Colosseo (3 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">8:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Colosseum (audio guide)</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1.5hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Meet 30min before tour!</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">10am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Ice Cream & Constantine View?</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">10:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to Palatine View/Augustus House</div>
+
+    <div class="label">Travel</div>
+    <div class="value">20+ min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time"><strong>11:30am</strong></div>
+
+    <div class="label">Activity</div>
+    <div class="value">Augustus House</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">30 minutes</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">(English: 11:30am, 2:30pm)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">Noon</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to Basilica of Maxentius</div>
+
+    <div class="label">Travel</div>
+    <div class="value">15 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Photos</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">12:30pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk through Ruins area</div>
+
+    <div class="label">Travel</div>
+    <div class="value">30 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">30</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">1pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to LUNCH: Pizzeria Imperiale</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">2pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to Flajen Column</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">2:30pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to Emmanuel Monument</div>
+
+    <div class="label">Travel</div>
+    <div class="value">10 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1 hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">3:30pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Terrace/Café/Elevator</div>
+
+    <div class="label">Travel</div>
+    <div class="value">5 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Photos/snack/Chill</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Café rez</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">4pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Walk to Forum View (Viving Room Pic)</div>
+
+    <div class="label">Travel</div>
+    <div class="value">13 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">Reminisce</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Thru Michaelangelo Square</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Hotel</div>
+
+    <div class="label">Travel</div>
+    <div class="value">20 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">(every 8 min)</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Fori Imperiali/Campidoglio #51</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Exit: "Manzoni MA" (4 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">5:30pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Showers cuz we stink</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">6 or 7? DOH!</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Dinner: Marco's</div>
+
+    <div class="label">Travel</div>
+    <div class="value">Across Street</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div>
+    <div class="value time">9pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Early sleep… hey, you cwose yer eyes!</div>
+
+    <div class="label">Travel</div>
+    <div class="value">*</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">*</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">*</div>
+
+    <div class="label">Comments</div>
+    <div class="value">*</div>
+  </div>
+
+</div>
+
+
+
+<!-- WEDNESDAY -->
+<div class="day" id="wed-6-17" style="display:none;">
+
+  <h2>Wednesday 6/17<BR> &nbsp&nbspRome</h2>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">8am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Breakfast: Ciamei caffè?</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">4 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">30 min</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Walk North 2 blocks</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Via Emanuele Filiberto, 57</div>
+
+    <div class="label">Comments</div>
+    <div class="value"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">8:30am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to St. Mary Major</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">7 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">1/2 Block north (590 or 360)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">EXIT: Carlo Alberto (2 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(Every 10 min)</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">10am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Spanish Steps/Church</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">8 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Walk to Termini Metro: A Battistinii</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">EXIT: Spagna (3 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">11am</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Trevi Fountain / Gelato?</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">From steps: Veer R, 2nd R, L, 2nd R.</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Down Via della Stamperia</div>
+
+    <div class="label">Comments</div>
+    <div class="value"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">1pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Hadrians Temple/Pantheon/Elephant</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">10 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Walk down Via delle Muratte to…</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Via di Pietra to Via Pastini</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Tickets</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">2pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Piazza Navona/LUNCH?</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">5 min walk</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">1hr</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Walk down Via Giustiniani to…</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Corsia Agonale (to the left)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Fiametta? McD?</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">3:05pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Mouth of Truth/Hercules/Pons</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">15 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">30min</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Zanardelli ( #628)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">EXIT: Greca  (7stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">(Basilica Santa Maria)</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">4pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Pyramid of Caius Cestius</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">16 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">15 min</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Across bridge: Lgt Alberteschi (#23)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">EXIT: Ostiense-Piramide</div>
+
+    <div class="label">Comments</div>
+    <div class="value">Built in 12 BC!  Dang!</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">4:42pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus to Circus Maximus</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">8 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value">15 min</div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Porta S. Paolo (#75 North of Fort)</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">EXIT: Circo Massimo (3 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value">6th Century BC!!</div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">5:37pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Bus back to hotel</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value">21 min</div>
+
+    <div class="label">Spend Time</div>
+    <div class="value"></div>
+
+    <div class="label">Directions Start</div>
+    <div class="value">Aventino (#3 Valle Giulia)-center st.</div>
+
+    <div class="label">Directions End</div>
+    <div class="value">Ex Manzoni (5 stops)</div>
+
+    <div class="label">Comments</div>
+    <div class="value"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="label">Time</div>
+    <div class="value time">6pm</div>
+
+    <div class="label">Activity</div>
+    <div class="value">Dinner: By hotel</div>
+
+    <div class="label">Travel Time</div>
+    <div class="value"></div>
+
+    <div class="label">Spend Time</div>
+    <div class="value"></div>
+
+    <div class="label">Directions Start</div>
+    <div class="value"></div>
+
+    <div class="label">Directions End</div>
+    <div class="value"></div>
+
+    <div class="label">Comments</div>
+    <div class="value"></div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!-- THURSDAY -->
+<div class="day" id="thu-6-18" style="display:none;">
+
+  <h2>Thursday 6/18<BR> &nbsp&nbspRome</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6am</div>
+    <div class="label">Activity</div><div class="value">Breakfast @ Hotel</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6:32am</div>
+    <div class="label">Activity</div><div class="value">Metro to St. Peters (or 6:38am)</div>
+    <div class="label">Travel Time</div><div class="value">15 min walk 13 min metro</div>
+    <div class="label">Spend Time</div><div class="value">(every 3 min)</div>
+    <div class="label">Directions Start</div><div class="value">Manzoni (M-A Battistini) (5-minute-walk from b&b)</div>
+    <div class="label">Directions End</div><div class="value">Ex: Ottaviano (8 stops)</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7am</div>
+    <div class="label">Activity</div><div class="value">St. Peter's Basilica</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1hr security line?</div>
+    <div class="label">Directions Start</div><div class="value">S. on Ottaviano (past Jollybee)</div>
+    <div class="label">Directions End</div><div class="value">Line for St. Peters</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">St. Peter's Dome</div>
+    <div class="label">Travel Time</div><div class="value">Meet @ Stairs</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11am</div>
+    <div class="label">Activity</div><div class="value">Sistine Chappel/Museums</div>
+    <div class="label">Travel Time</div><div class="value">16 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">(Leave St. Peter @ 10:15am)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm-ish</div>
+    <div class="label">Activity</div><div class="value">LUNCH: 200 Gradi Deli</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30min (+Gelato)</div>
+    <div class="label">Directions Start</div><div class="value">10 min walk to Hedera Gelato</div>
+    <div class="label">Directions End</div><div class="value">Main st. R on Ombrellari,</div>
+    <div class="label">Comments</div><div class="value">Left on Borgo Pio</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:15pm</div>
+    <div class="label">Activity</div><div class="value">Castel Saint Angelo</div>
+    <div class="label">Travel Time</div><div class="value">10 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1.5hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:50pm</div>
+    <div class="label">Activity</div><div class="value">Walk to Alfieri or to bus stop (leave 3:35)</div>
+    <div class="label">Travel Time</div><div class="value">25 min either</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">#628 Zanardelli (Volpi/Farnesina)</div>
+    <div class="label">Directions End</div><div class="value">EXIT:Passeggiata Ripetta.3 stops</div>
+    <div class="label">Comments</div><div class="value">Walk to Via del Corso, 1</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm</div>
+    <div class="label">Activity</div><div class="value">Leather Jacket Shopping</div>
+    <div class="label">Travel Time</div><div class="value">30 min?</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Alfieri Roma Leather</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Piazza Popolo</div>
+    <div class="label">Travel Time</div><div class="value">2 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:45pm</div>
+    <div class="label">Activity</div><div class="value">Bus to Chiesa Santa Maria Via Church</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">#119 @ P.Za Popolo (every 10 min)</div>
+    <div class="label">Directions End</div><div class="value">EXIT: Corso/L.Go Chigi (4 stops)</div>
+    <div class="label">Comments</div><div class="value">16th century Ancient Holy Well</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: La locanda del tempio</div>
+    <div class="label">Travel Time</div><div class="value">4 min</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Via di Pietra, 85</div>
+    <div class="label">Comments</div><div class="value">CALL RESV# 39 064 754 5886</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm-ish</div>
+    <div class="label">Activity</div><div class="value">Walk to Sant'Ignazio (or after fountain)</div>
+    <div class="label">Travel Time</div><div class="value">2 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min?</div>
+    <div class="label">Directions Start</div><div class="value">(Left, down narrow alley)</div>
+    <div class="label">Directions End</div><div class="value">Piazza Sant'Ignazio</div>
+    <div class="label">Comments</div><div class="value">Illusion Ceiling</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8-9pm</div>
+    <div class="label">Activity</div><div class="value">Trevi Fountain @ Night</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Bring pennies cuz we're cheap!</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Night Photo Op</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:05pm</div>
+    <div class="label">Activity</div><div class="value">Bus To Hotel.</div>
+    <div class="label">Travel Time</div><div class="value">25 min</div>
+    <div class="label">Spend Time</div><div class="value">(Every 10 min)</div>
+    <div class="label">Directions Start</div><div class="value">#51 or #85 Corso/Minghetti</div>
+    <div class="label">Directions End</div><div class="value">EXIT: Manzoni (6-10 stops)</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:30pm</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- FRIDAY -->
+<div class="day" id="fri-6-19" style="display:none;">
+
+  <h2>Friday 6/19<BR> &nbsp&nbspRome to Pisa & Florence</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:41am</div>
+    <div class="label">Activity</div><div class="value">6 min Walk to Metro Station</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value">(every 3 min)</div>
+    <div class="label">Directions Start</div><div class="value">Manzoni Metro A Line</div>
+    <div class="label">Directions End</div><div class="value">Termini (2 stops)</div>
+    <div class="label">Comments</div><div class="value">(leave at 7:30am)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:10am</div>
+    <div class="label">Activity</div><div class="value">Train to Florence</div>
+    <div class="label">Travel Time</div><div class="value">1hr 36 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">#9516</div>
+    <div class="label">Directions End</div><div class="value">Firenze Santa Maria Station</div>
+    <div class="label">Comments</div><div class="value">Bistro in car #5</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10am</div>
+    <div class="label">Activity</div><div class="value">Luggage Storage in station</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">40 min layover</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">(By track 16)</div>
+    <div class="label">Comments</div><div class="value">Chillax a bit.</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10:28am</div>
+    <div class="label">Activity</div><div class="value">Train to Pisa</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">#4021</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">Cab to tower</div>
+    <div class="label">Travel Time</div><div class="value">15-20 min</div>
+    <div class="label">Spend Time</div><div class="value">(bus every 10 min)</div>
+    <div class="label">Directions Start</div><div class="value">Stazione 1: 1+ Park Pietrasantina</div>
+    <div class="label">Directions End</div><div class="value">Exit: Torre di Pisa 1 (9 stops)</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">Noonish</div>
+    <div class="label">Activity</div><div class="value">Cathedral/Baptisry/Museum</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:30pm</div>
+    <div class="label">Activity</div><div class="value">Leaning Tower Tour</div>
+    <div class="label">Travel Time</div><div class="value">3 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:05pm</div>
+    <div class="label">Activity</div><div class="value">Lunch: La Pizza Artigianale</div>
+    <div class="label">Travel Time</div><div class="value">3 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30-45min</div>
+    <div class="label">Directions Start</div><div class="value">East of tower</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Cab or bus to Pisa Train Station</div>
+    <div class="label">Travel Time</div><div class="value">20-30 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Piazza della Stazione</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:32pm</div>
+    <div class="label">Activity</div><div class="value">Train to Florence #4042</div>
+    <div class="label">Travel Time</div><div class="value">61 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Pickup Luggage!</div>
+    <div class="label">Directions End</div><div class="value">Firenze Santa Maria Station</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:33pm</div>
+    <div class="label">Activity</div><div class="value">Walk to HOTEL: Abaco (2n). 300e due</div>
+    <div class="label">Travel Time</div><div class="value">8 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">South on Via Panzani. (towards Santa Maria Novella)</div>
+    <div class="label">Directions End</div><div class="value">Left on Via dei Banchi (2 blocks) #1</div>
+    <div class="label">Comments</div><div class="value">Reservation. #9T8ET3YPCBD. PH:+39 055 2381919. Blue keypad outside. PIN# 5363. 2nd floor, Same PIN code. Reception desk and key #1 attached behind counter. Room #1 on the right where the bar ends.</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Massimo/Michaelangelo + Market</div>
+    <div class="label">Travel Time</div><div class="value">6+4 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">13 Borgo la Noce</div>
+    <div class="label">Directions End</div><div class="value">11 Giovan Battista Zannoni</div>
+    <div class="label">Comments</div><div class="value">Leather (market = fake)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Dinner: Mattacena?</div>
+    <div class="label">Travel Time</div><div class="value">2 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- SATURDAY -->
+<div class="day" id="sat-6-20" style="display:none;">
+
+  <h2>Saturday 6/20<BR> &nbsp&nbspFlorence</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Pastry Dolcezza or hotel</div>
+    <div class="label">Travel Time</div><div class="value">Next door</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Cathedral/Duomo Climb</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">Via de' Cerretani</div>
+    <div class="label">Directions End</div><div class="value">Duomo</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10am</div>
+    <div class="label">Activity</div><div class="value">Baptistry</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11am</div>
+    <div class="label">Activity</div><div class="value">Cathedral Bell Tower</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">Noonish</div>
+    <div class="label">Activity</div><div class="value">Lunch: Vini e Vecchi? Paoli 1827?</div>
+    <div class="label">Travel Time</div><div class="value">6 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">S. on Via dei Calzaiuoli</div>
+    <div class="label">Directions End</div><div class="value">L. on dei Cimatori, R.</div>
+    <div class="label">Comments</div><div class="value">R. on Via dei Magazzini</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Torre di Arnolfo</div>
+    <div class="label">Travel Time</div><div class="value">6 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm</div>
+    <div class="label">Activity</div><div class="value">Palazzo Vecchio</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1hr?</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">PW: rJlYia3p</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Ponte Vecchio</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">15 min visit shops</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:30pm</div>
+    <div class="label">Activity</div><div class="value">Michaelangelo Plaza</div>
+    <div class="label">Travel Time</div><div class="value">25 min walk</div>
+    <div class="label">Spend Time</div><div class="value">10 min Photo Op</div>
+    <div class="label">Directions Start</div><div class="value">Walk along river…</div>
+    <div class="label">Directions End</div><div class="value">R. on Piazzetta Salvatore, up hill</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:15pm</div>
+    <div class="label">Activity</div><div class="value">Snack: Gelateria dei Neri?</div>
+    <div class="label">Travel Time</div><div class="value">17 min walk</div>
+    <div class="label">Spend Time</div><div class="value">20 min</div>
+    <div class="label">Directions Start</div><div class="value">Along river, cross Ponte alle Grazie…</div>
+    <div class="label">Directions End</div><div class="value">L. on Via de Neri</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Walk back to hotel via Bronze Boar</div>
+    <div class="label">Travel Time</div><div class="value">15 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">Via de Neri to Della Ninna</div>
+    <div class="label">Directions End</div><div class="value">N. on Via dei Calzaiuoli</div>
+    <div class="label">Comments</div><div class="value">L. on San Giovanni</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Dinner: MammaMia? ???</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- SUNDAY -->
+<div class="day" id="sun-6-21" style="display:none;">
+
+  <h2>Sunday 6/21<BR> &nbsp&nbspFlorence to Venice</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:30am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Moka Arra Café or hotel?</div>
+    <div class="label">Travel Time</div><div class="value">1 min</div>
+    <div class="label">Spend Time</div><div class="value">10 min</div>
+    <div class="label">Directions Start</div><div class="value">Via dei Banchi</div>
+    <div class="label">Directions End</div><div class="value">Vie del Giglio</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Walk to Train Station</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">W. on Via dei Banchi to Piazza SMN</div>
+    <div class="label">Directions End</div><div class="value">N. to Station: Santa Maria Novella</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:39am</div>
+    <div class="label">Activity</div><div class="value">Train to Venice</div>
+    <div class="label">Travel Time</div><div class="value">2hr 16 min</div>
+    <div class="label">Spend Time</div><div class="value">(lunch on train?)</div>
+    <div class="label">Directions Start</div><div class="value">Italo #8924</div>
+    <div class="label">Directions End</div><div class="value">Arrive 10:55am</div>
+    <div class="label">Comments</div><div class="value">Car 5. Seats 1, 2, 3</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:08/11:20</div>
+    <div class="label">Activity</div><div class="value">Ferry to hotel (or water taxi if long line)</div>
+    <div class="label">Travel Time</div><div class="value">20+ min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Ferrovia "b"</div>
+    <div class="label">Directions End</div><div class="value">Exit: Rialto (2 stops)</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">HOTEL: Ca' Rialto House (1n)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">Luggage Storage!</div>
+    <div class="label">Directions Start</div><div class="value">PH: +39 041 5209166</div>
+    <div class="label">Directions End</div><div class="value">Riva del Ferro, 5149</div>
+    <div class="label">Comments</div><div class="value">Rsv# YY27BF</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">Noonish</div>
+    <div class="label">Activity</div><div class="value">Rialto Bridge</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Tourist & Photo Ops</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Bell Tower (audio tour)</div>
+    <div class="label">Travel Time</div><div class="value">10 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">E. along canal. L on Calle Larga Mazzini. R on Sotoportego de le Acque.</div>
+    <div class="label">Directions End</div><div class="value">L.on Ponte dei Baretteri into Marzaria S. Zulian.  Veer R. L.on Merceria Orologio to St. Marks</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm</div>
+    <div class="label">Activity</div><div class="value">St. Mark's Basilica (audio tour)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1 hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Lunch: Florian Café? (piazza)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">OR Pizzeria Conca D'Oro?</div>
+    <div class="label">Directions End</div><div class="value">(4 min walk)</div>
+    <div class="label">Comments</div><div class="value">Chillax for snacks</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm-ish</div>
+    <div class="label">Activity</div><div class="value">S. Marco #1 Ferry (7min ) to</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk + 7 min ride</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Santa Maria Church & viewpoint</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1 hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">(Dining room painting)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:30pm-ish</div>
+    <div class="label">Activity</div><div class="value">Walk to Hotel</div>
+    <div class="label">Travel Time</div><div class="value">25+ minutes</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Pics on Phone or follow signs.</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm-ish</div>
+    <div class="label">Activity</div><div class="value">Dinner: Campo square? Gelato?</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Buy snacks for morning</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- SLOVENIA -->
+
+<div class="day" id="slovenia" style="display:none;">
+
+<div class="card">
+
+ <div class="value" style="font-size:30px; font-weight:bold;">
+  🇸🇮 Slovenia
+</div>
+
+  <div class="value">2 Nights: (6/22 - 6/24)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Ljubljana: 2 Nights<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Best Western
+  </div>
+
+  </div>
+
+</div>
+
+
+ 
+
+
+
+<!-- MONDAY -->
+<div class="day" id="mon-6-22" style="display:none;">
+
+  <h2>Monday 6/22<BR> &nbsp&nbspVenice to Ljubljana</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7am</div>
+    <div class="label">Activity</div><div class="value">Breakfastbar snacks</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(beware Eddys fast food diarrhea!)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:35am</div>
+    <div class="label">Activity</div><div class="value">Water Taxi #2 to Bus</div>
+    <div class="label">Travel Time</div><div class="value">25 min  water +5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">(every 12 min: NOT 7:42#2/)</div>
+    <div class="label">Directions Start</div><div class="value">#2 Water Taxi by Hotel</div>
+    <div class="label">Directions End</div><div class="value">Exit: Tronchetto (4 stops)</div>
+    <div class="label">Comments</div><div class="value">Tickets: Buy at taxi stand</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:10am</div>
+    <div class="label">Activity</div><div class="value">Bus to Ljubljana (Slovenia)</div>
+    <div class="label">Travel Time</div><div class="value">4hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Venice (Tronchetto)</div>
+    <div class="label">Directions End</div><div class="value">Ex: Ljubljana Bus Station</div>
+    <div class="label">Comments</div><div class="value">Rsv#: 329 470 3646</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:10pm</div>
+    <div class="label">Activity</div><div class="value">Lunch: McD</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:30pm</div>
+    <div class="label">Activity</div><div class="value">EboRental Car (2days:)</div>
+    <div class="label">Travel Time</div><div class="value">1 min</div>
+    <div class="label">Spend Time</div><div class="value">ASAP!</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">By Bus dropoff</div>
+    <div class="label">Comments</div><div class="value">Reservation: 9722448661</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:45pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Lake Bled</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(try EasyPark app)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:45pm</div>
+    <div class="label">Activity</div><div class="value">Park & walk to boats</div>
+    <div class="label">Travel Time</div><div class="value">15 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Parking lot: R</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm-ish</div>
+    <div class="label">Activity</div><div class="value">Water Taxi to island</div>
+    <div class="label">Travel Time</div><div class="value">15 min</div>
+    <div class="label">Spend Time</div><div class="value">45 min</div>
+    <div class="label">Directions Start</div><div class="value">Leaves Hourly</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm-ish</div>
+    <div class="label">Activity</div><div class="value">Drive up to Bled Castle</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">Free iPhone guide</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Tickets: Apple Wallet</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Bled Castle</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation:</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Drive back to hotel (around Lake)</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Use email printout for Valet (60e)</div>
+    <div class="label">Directions End</div><div class="value">Address: Slovenska cesta 34</div>
+    <div class="label">Comments</div><div class="value">PH: +38 614 701100</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8pm-ish</div>
+    <div class="label">Activity</div><div class="value">HOTEL: Best Western (2n)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation: 518891139</div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- TUESDAY -->
+<div class="day" id="tue-6-23" style="display:none;">
+
+  <h2>Tuesday 6/23<BR> &nbsp&nbspLjubljana</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">Epic Breakfast!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Drive to Skocjan</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Cold!  Bring Jackets!</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11am</div>
+    <div class="label">Activity</div><div class="value">Skocjan Caves</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">2hrs</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:30pm</div>
+    <div class="label">Activity</div><div class="value">Lunch: Pr'betanci?</div>
+    <div class="label">Travel Time</div><div class="value">5 min drive</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:30pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Predjama</div>
+    <div class="label">Travel Time</div><div class="value">30 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Predjama Castle</div>
+    <div class="label">Travel Time</div><div class="value">60-90 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Under-Cave photo ops/gift shop/Poop</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value">20</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Drive back to hotel/Shower?</div>
+    <div class="label">Travel Time</div><div class="value">1 hour</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm</div>
+    <div class="label">Activity</div><div class="value">Dragon Bridge/City Walk</div>
+    <div class="label">Travel Time</div><div class="value">10 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Gostilna Sokol</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Rsv# hotmail 1/15/29 & Files</div>
+    <div class="label">Directions End</div><div class="value">Ciril-Metodov trg 18</div>
+    <div class="label">Comments</div><div class="value">386 31 589 179</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+<div class="day" id="austria" style="display:none;">
+
+  <div class="card">
+
+    <div class="value" style="font-size:30px; font-weight:bold;">
+      🇦🇹 Austria
+    </div>
+
+    <div class="value">2 Nights: (6/24 - 6/26)</div>
+
+    <div class="label">Cities & Hotels:</div><br>
+    <div class="value">
+      &#8226;&nbsp;Salzburg: 2 Nights<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Kaiserbräu
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!-- WEDNESDAY -->
+<div class="day" id="wed-6-24" style="display:none;">
+
+  <h2>Wednesday 6/24<BR> &nbsp&nbspLjubljana to Salzburg</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Epic Breakfast #2</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10am</div>
+    <div class="label">Activity</div><div class="value">Return Car (Eborent) / Walk to train</div>
+    <div class="label">Travel Time</div><div class="value">3 min</div>
+    <div class="label">Spend Time</div><div class="value">10</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:08am</div>
+    <div class="label">Activity</div><div class="value">Train to Salzburg</div>
+    <div class="label">Travel Time</div><div class="value">4hr 45min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">#114 EuroCity</div>
+    <div class="label">Directions End</div><div class="value">Salzburg HBF</div>
+    <div class="label">Comments</div><div class="value">Car 261. Seats 101, 102, 103</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm</div>
+    <div class="label">Activity</div><div class="value">Cab to Hotel</div>
+    <div class="label">Travel Time</div><div class="value">20 min ride</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Hotel: Kaiserbrau (2n: 604e due)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">PH: +43 662 842445</div>
+    <div class="label">Directions End</div><div class="value">Kaigasse 33, 5020</div>
+    <div class="label">Comments</div><div class="value">Rsv# 87051781</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Fortress: (Walk to funicular)</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">Kaigasse to Kapitelgasse.</div>
+    <div class="label">Directions End</div><div class="value">L. down Festungasse</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6:30pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Panoramic Terrace</div>
+    <div class="label">Travel Time</div><div class="value">In Castle</div>
+    <div class="label">Spend Time</div><div class="value">1 hour</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation Email/Files</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">.</div>
+    <div class="label">Activity</div><div class="value">(Furnicular closes at 7pm)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Walk downhill past abbey to hotel</div>
+    <div class="label">Travel Time</div><div class="value">13 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+<!-- THURSDAY -->
+<div class="day" id="thu-6-25" style="display:none;">
+
+  <h2>Thursday 6/25<BR>  &nbsp&nbsp Salzburg</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Hotel</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:30am</div>
+    <div class="label">Activity</div><div class="value">Walk/bus  to Tours</div>
+    <div class="label">Travel Time</div><div class="value">12 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Walk across bridge to Mozartsteg. Bus: Landstraße #3,#5,#6 #25, #160</div>
+    <div class="label">Directions End</div><div class="value">Exit: Mirabellplatz (2 stops)</div>
+    <div class="label">Comments</div><div class="value">Kaigasse st. L at fork</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">J&amp;W: Music/Salt Mine</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">9hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">Daddy: Eagles Nest</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">5hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2-3pm</div>
+    <div class="label">Activity</div><div class="value">Daddy: Mozart Memorial/walk</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Via Stefen Zweig Weg</div>
+    <div class="label">Directions End</div><div class="value">Felix Fort/Monastery</div>
+    <div class="label">Comments</div><div class="value">Down photo op steps</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:45pm</div>
+    <div class="label">Activity</div><div class="value">J&amp;W Return bus trip</div>
+    <div class="label">Travel Time</div><div class="value">20 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Across street (Hallein Bahnhof stop)  #160, #170, or #175</div>
+    <div class="label">Directions End</div><div class="value">Ex: Mozartsteg/Rudolfskai:3 stops</div>
+    <div class="label">Comments</div><div class="value">L. down Mozart Platz/Kaigasse to hotel.</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Zwettler's Wirtshaus</div>
+    <div class="label">Travel Time</div><div class="value">3 min Walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">33 Kaigasse</div>
+    <div class="label">Comments</div><div class="value">Reservation: Files</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8pm</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- GERMANY -->
+<div class="day" id="germany" style="display:none;">
+
+
+  <div class="card">
+
+    <div class="value" style="font-size:30px; font-weight:bold;">
+      🇩🇪 Germany
+    </div>
+
+    <div class="value">3 Nights: (6/26 - 6/29)</div>
+
+    <div class="label">Cities & Hotels:</div><br>
+    <div class="value">
+      &#8226;&nbsp;Munich: 1 Night<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Kings<br><br>
+
+      &#8226;&nbsp;Rothenburg: 1 Night<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Goldener Hirsch<br><br>
+
+      &#8226;&nbsp;Fussen: 1 Night<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Sonne
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<!-- FRIDAY -->
+<div class="day" id="fri-6-26" style="display:none;">
+
+  <h2>Friday 6/26 <BR> &nbsp&nbsp Salzburg to Munich</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Hotel</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Nonberg Abbey!</div>
+    <div class="label">Travel Time</div><div class="value">20 min walk (roundtrip)</div>
+    <div class="label">Spend Time</div><div class="value">10 min</div>
+    <div class="label">Directions Start</div><div class="value">E. on Kaigasse</div>
+    <div class="label">Directions End</div><div class="value">Up alley steps.</div>
+    <div class="label">Comments</div><div class="value">Photo Op &amp; light candle</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10am</div>
+    <div class="label">Activity</div><div class="value">Taxi to Train Station</div>
+    <div class="label">Travel Time</div><div class="value">20 min ride</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11am</div>
+    <div class="label">Activity</div><div class="value">Train to Munich</div>
+    <div class="label">Travel Time</div><div class="value">1hr 40min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Track 11: RJX #262</div>
+    <div class="label">Directions End</div><div class="value">Exit: Munich HBF (nonstop)</div>
+    <div class="label">Comments</div><div class="value">Car 23. Seats 115, 116, 117</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Hotel: Kings (1n)</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">Luggage Storage</div>
+    <div class="label">Directions Start</div><div class="value">PH: +49 895 15530</div>
+    <div class="label">Directions End</div><div class="value">Marsstraße 15</div>
+    <div class="label">Comments</div><div class="value">Reservation: 878354514</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm (clock)</div>
+    <div class="label">Activity</div><div class="value">City Square (or Frauenkirch 1st)</div>
+    <div class="label">Travel Time</div><div class="value">4 min Walk     12 min Metro</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">HBF S2, S5, S6</div>
+    <div class="label">Directions End</div><div class="value">Exit: Marienplatz (2 stops)</div>
+    <div class="label">Comments</div><div class="value">Giant Clock on the hour!</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Frauenkirch/Shops</div>
+    <div class="label">Travel Time</div><div class="value">4 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">W. on Main walkway</div>
+    <div class="label">Directions End</div><div class="value">R. on Liebfrauenstraße</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm</div>
+    <div class="label">Activity</div><div class="value">St. Peter Gothic Church</div>
+    <div class="label">Travel Time</div><div class="value">4 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">Clock Tower</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Hofbräuhaus</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">No reservation needed</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Metro to Hotel</div>
+    <div class="label">Travel Time</div><div class="value">13 min</div>
+    <div class="label">Spend Time</div><div class="value">S86, S5, S3, S4</div>
+    <div class="label">Directions Start</div><div class="value">W. on Münzstraße, Left on Sparkassenstraße.  R. to Marienplatz.</div>
+    <div class="label">Directions End</div><div class="value">Exit HBF.</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- SATURDAY -->
+<div class="day" id="sat-6-27" style="display:none;">
+
+  <h2>Saturday 6/27 <BR> &nbsp&nbsp Munich to Rothenburg</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Bakery across street</div>
+    <div class="label">Travel Time</div><div class="value">1 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(or A Little Lost Café around corner)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">EuropCar (5 days)</div>
+    <div class="label">Travel Time</div><div class="value">2 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation:1195015117</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Drive to Dinkelsbühl Altstadt</div>
+    <div class="label">Travel Time</div><div class="value">2hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Parking P1 SCHWEDENWIESE</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11am</div>
+    <div class="label">Activity</div><div class="value">Café Central/St. George</div>
+    <div class="label">Travel Time</div><div class="value">7 min walk from park lot</div>
+    <div class="label">Spend Time</div><div class="value">2 hrs</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Rothenburg</div>
+    <div class="label">Travel Time</div><div class="value">45min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm</div>
+    <div class="label">Activity</div><div class="value">Hotel: Goldener Hirsch (1n)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">u. Schmiedgasse 16. 49-986-1874990</div>
+    <div class="label">Comments</div><div class="value">Reservation: 88138184 (114). Pay 32e at hotel.</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3-5pm</div>
+    <div class="label">Activity</div><div class="value">Wall Walk/Church/Shops</div>
+    <div class="label">Travel Time</div><div class="value">2 hrs</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Check Maps in Files or printed one.</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5-6pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Weinstube zum Pulverer</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">7 min walk from hotel</div>
+    <div class="label">Directions End</div><div class="value">Herrngasse 31: PH +49 9861 976182</div>
+    <div class="label">Comments</div><div class="value">Reservation: Emailed 3/19?</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7-ish</div>
+    <div class="label">Activity</div><div class="value">Relax/Shower before night walk?</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8pm</div>
+    <div class="label">Activity</div><div class="value">Nightwatch Tour</div>
+    <div class="label">Travel Time</div><div class="value">4 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value">Market Square</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Walkup Tour</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+<!-- SUNDAY -->
+<div class="day" id="sun-6-28" style="display:none;">
+
+  <h2>Sunday 6/28 <BR> &nbsp&nbsp Rothenburg to Fussen</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:30am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Hotel!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Drive to: Fussen (Schloss Neuschwanstein)</div>
+    <div class="label">Travel Time</div><div class="value">2.5hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Parkplatz P4, or any other.</div>
+    <div class="label">Comments</div><div class="value">Shops by hotels</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">Bus to Mary's Bridge</div>
+    <div class="label">Travel Time</div><div class="value">20 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Lot 4, every 20 min-ish</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Photo Op (picture picture)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">12:15pm</div>
+    <div class="label">Activity</div><div class="value">Walk to Schloss Neuschwanstein</div>
+    <div class="label">Travel Time</div><div class="value">15 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Shuttle tix online or driver</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">12:55pm</div>
+    <div class="label">Activity</div><div class="value">Schloss Neuschwanstein Tour</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">30 min + shopping</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">(Castle Gift Shop!)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm</div>
+    <div class="label">Activity</div><div class="value">Walk down to Car</div>
+    <div class="label">Travel Time</div><div class="value">30 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:30pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Tegelberg</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">N. on Colomanstraße,</div>
+    <div class="label">Directions End</div><div class="value">R. on Tegelbergstraße</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:40pm</div>
+    <div class="label">Activity</div><div class="value">Tegelberg Luge!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">10 min ride</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Tegelberg Cablecar</div>
+    <div class="label">Travel Time</div><div class="value">10 min ride</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:30pm-ish</div>
+    <div class="label">Activity</div><div class="value">Lunch up top?</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1 hour</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">(Or Schwangau Castle Brewery?)</div>
+    <div class="label">Comments</div><div class="value">Reservation: EMAIL 3/19 & 4/1)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Wieskirche</div>
+    <div class="label">Travel Time</div><div class="value">30 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">N. on Colomanstraße R. on Münchener Str./B17</div>
+    <div class="label">Directions End</div><div class="value">R. on Ammergauer Str/St 20509. R. on ST.2559. Wieskirche Parking</div>
+    <div class="label">Comments</div><div class="value">(Visit hours 5-7pm)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm</div>
+    <div class="label">Activity</div><div class="value">Drive to Hotel: "Sonne " (1n)</div>
+    <div class="label">Travel Time</div><div class="value">35 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Prinzregentenpl. 1, 87629 PH:+4983629080</div>
+    <div class="label">Comments</div><div class="value">Rsv# 51794</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Dinner & PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Schnitzelhaus? Kebab? Hotel?</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- SWITZERLAND -->
+<div class="day" id="switzerland" style="display:none;">
+
+
+  <div class="card">
+
+<div class="value" style="font-size:30px; font-weight:bold;">
+  🇨🇭 Switzerland
+</div>
+
+
+    <div class="value">4 Nights: (6/29 - 7/3)</div>
+
+  <div class="label">Cities & Hotels:</div><br>
+  <div class="value">
+    &#8226;&nbsp;Lauterbrunnen: 3 Nights<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Staubbach<br><br>
+
+    &#8226;&nbsp;Zurich: 1 Night<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Hotel: Limmathof
+  </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+<!-- MONDAY -->
+<div class="day" id="mon-6-29" style="display:none;">
+
+  <h2>Monday 6/29 <BR> &nbsp&nbsp Fussen to Lauterbrunnen</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Breakfast: Hotel</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">Drive to: Meersburg</div>
+    <div class="label">Travel Time</div><div class="value">2hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">N. on Alatseestraße. Roundabout Kemptener (3rd). Onto A7. Exit 136 A980/B12 onto B32 to A96(R). Exit 3 (R) to B31. B33 to Marktpl. L on Stefan-Lochner. L again to park.</div>
+    <div class="label">Directions End</div><div class="value">Parkhaus Stefan-lochner-str</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time"></div>
+    <div class="label">Activity</div><div class="value">(Parkhaus Stefan-lochner-str)</div>
+    <div class="label">Travel Time</div><div class="value">Parking</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10:30am</div>
+    <div class="label">Activity</div><div class="value">Walk to Castle (Audio Tour)</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">* Buy tix at castle *</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">Lunch in/by Castle/Explore</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm-ish</div>
+    <div class="label">Activity</div><div class="value">Ferry to: Konstanz</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value">L on B33 to ferry.</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2pm</div>
+    <div class="label">Activity</div><div class="value">Drive to: Lauterbrunnen</div>
+    <div class="label">Travel Time</div><div class="value">3 hrs</div>
+    <div class="label">Spend Time</div><div class="value">Tolls!</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Hotel: Staubbach (3n: 930e due)</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Im Rohr 424F, Lauterbrunnen 3822</div>
+    <div class="label">Comments</div><div class="value">41 338 555454 R Reservation: CPB-3445-014121</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Dinner: Horner Pub/Hotel</div>
+    <div class="label">Travel Time</div><div class="value">3 min walk</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Emailed 3/19 about resv no reply</div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- TUESDAY -->
+<div class="day" id="tue-6-30" style="display:none;">
+
+  <h2>Tuesday 6/30 <BR> &nbsp&nbsp Lauterbrunnen</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6:45am</div>
+    <div class="label">Activity</div><div class="value">Walk to Breakfast at Train Station</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value">20 min?</div>
+    <div class="label">Directions Start</div><div class="value">Starbucks at the station!</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">(Tickets & 1/2 Pass in Wallet)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7:30am</div>
+    <div class="label">Activity</div><div class="value">Train to Kleine Scheidegg #63</div>
+    <div class="label">Travel Time</div><div class="value">38 min</div>
+    <div class="label">Spend Time</div><div class="value">(19 min Layover)</div>
+    <div class="label">Directions Start</div><div class="value">Platform 3 ("Wengernalpbahn")</div>
+    <div class="label">Directions End</div><div class="value">Exit: Kleine Scheidegg (5 stops)</div>
+    <div class="label">Comments</div><div class="value">(Right side for views)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:27am</div>
+    <div class="label">Activity</div><div class="value">Train to Eigerglacier #65</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">(13 minute layover)</div>
+    <div class="label">Directions Start</div><div class="value">Platform 21</div>
+    <div class="label">Directions End</div><div class="value">Exit: Eigergletscher</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:45am</div>
+    <div class="label">Activity</div><div class="value">Train to Jungfraujoch #65</div>
+    <div class="label">Travel Time</div><div class="value">36 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Platform 3</div>
+    <div class="label">Directions End</div><div class="value">Exit: Jungfraujoch @9:11am</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:11am</div>
+    <div class="label">Activity</div><div class="value">Walk to Ice cave/Shops/Observatory</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">2 hours</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">BE PROMPT!</div>
+    <div class="label">Activity</div><div class="value">Return Trip</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:17am</div>
+    <div class="label">Activity</div><div class="value">Return Train to Kleine Scheidegg</div>
+    <div class="label">Travel Time</div><div class="value">37 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(Transfer @ Eigergletscher?)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">Noonish</div>
+    <div class="label">Activity</div><div class="value">Lunch: Eigernordwand or Chalet Bar</div>
+    <div class="label">Travel Time</div><div class="value">4 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Epic Walk down to Wengernalp</div>
+    <div class="label">Travel Time</div><div class="value">40 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:52pm</div>
+    <div class="label">Activity</div><div class="value">Train to Wengen</div>
+    <div class="label">Travel Time</div><div class="value">20 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(every 30 min)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">SBB App</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:30pm</div>
+    <div class="label">Activity</div><div class="value">Gondola Balcony to Mannlichen</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">GB2455</div>
+    <div class="label">Directions Start</div><div class="value">(every 20 min)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">SBB App</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:35pm</div>
+    <div class="label">Activity</div><div class="value">Hike to viewpoint</div>
+    <div class="label">Travel Time</div><div class="value">11 min</div>
+    <div class="label">Spend Time</div><div class="value">10 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Epic View (weather permitting)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Hike down to Next Gondola…</div>
+    <div class="label">Travel Time</div><div class="value">15 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:15pm</div>
+    <div class="label">Activity</div><div class="value">Gondola to Grindlewald</div>
+    <div class="label">Travel Time</div><div class="value">24 min</div>
+    <div class="label">Spend Time</div><div class="value">GGM</div>
+    <div class="label">Directions Start</div><div class="value">Every minute until 4:30pm</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">SBB App</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm</div>
+    <div class="label">Activity</div><div class="value">Eiger Express Gondola to Eigergletscher</div>
+    <div class="label">Travel Time</div><div class="value">20 min</div>
+    <div class="label">Spend Time</div><div class="value">GB2444</div>
+    <div class="label">Directions Start</div><div class="value">Every minute until 7pm</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">SBB App</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Walk down to Kleine Scheidegg</div>
+    <div class="label">Travel Time</div><div class="value">35 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Or use Jungfrau ticket to hotel</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:14pm</div>
+    <div class="label">Activity</div><div class="value">Train to Wengen/Lauterbrunnen</div>
+    <div class="label">Travel Time</div><div class="value">42 min</div>
+    <div class="label">Spend Time</div><div class="value">#CC63</div>
+    <div class="label">Directions Start</div><div class="value">(every 30 min until 6:14pm)</div>
+    <div class="label">Directions End</div><div class="value">Exit: Lauterbrunen</div>
+    <div class="label">Comments</div><div class="value">On Jungfrau Ticket</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm</div>
+    <div class="label">Activity</div><div class="value">Walk back to Hotel</div>
+    <div class="label">Travel Time</div><div class="value">10 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Dinner: Schützen or The Bell</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">No Reservation</div>
+  </div>
+
+</div>
+
+
+
+
+<!-- WEDNESDAY -->
+<div class="day" id="wed-7-1" style="display:none;">
+
+  <h2>Wednesday 7/1 <BR> &nbsp&nbsp Lauterbrunnen</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">Hotel Breakfast</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9am</div>
+    <div class="label">Activity</div><div class="value">Staubbach Falls</div>
+    <div class="label">Travel Time</div><div class="value">10 min walk</div>
+    <div class="label">Spend Time</div><div class="value">20 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:30am</div>
+    <div class="label">Activity</div><div class="value">Trümmelbach Falls (BRING CASH!)</div>
+    <div class="label">Travel Time</div><div class="value">5 min drive</div>
+    <div class="label">Spend Time</div><div class="value">60-90 min</div>
+    <div class="label">Directions Start</div><div class="value">S. across river, main road.</div>
+    <div class="label">Directions End</div><div class="value">To Trummel parking lot.</div>
+    <div class="label">Comments</div><div class="value">CASH ONLY!</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:06am</div>
+    <div class="label">Activity</div><div class="value">Stechelberg Gondola to Gimmelwald</div>
+    <div class="label">Travel Time</div><div class="value">7 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(EVERY 15 or 30 MIN)</div>
+    <div class="label">Directions End</div><div class="value">Waterfall view on Gondola!</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:13am</div>
+    <div class="label">Activity</div><div class="value">Gondola to Murren</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">Gondola to Birg/Schilthorn</div>
+    <div class="label">Travel Time</div><div class="value">15 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">12:30pm</div>
+    <div class="label">Activity</div><div class="value">Lunch: 360° Piz Gloria -007-</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1hr-ish</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">PH:</div>
+    <div class="label">Comments</div><div class="value">Reservation: Email/File</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:50pm</div>
+    <div class="label">Activity</div><div class="value">Gondola down to Birg</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">15-30 min</div>
+    <div class="label">Directions Start</div><div class="value">(Flexible schedule back down)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Gift shop/Scenic Walk Bridge</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:30pm</div>
+    <div class="label">Activity</div><div class="value">Gondola down to Murren</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">Dessert: Hotel Alpina</div>
+    <div class="label">Travel Time</div><div class="value">15 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1 hr</div>
+    <div class="label">Directions Start</div><div class="value">Walk thru Murren</div>
+    <div class="label">Directions End</div><div class="value">Hauptstrasse, 3825</div>
+    <div class="label">Comments</div><div class="value">Snacks,views & pics</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:05pm</div>
+    <div class="label">Activity</div><div class="value">Gondola back to car</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(or 4:05pm)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation: 3pm - Email</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:15pm</div>
+    <div class="label">Activity</div><div class="value">Murrenbach Falls</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">10 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">Walk to falls</div>
+    <div class="label">Comments</div><div class="value">Highest Swiss Waterfall</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Drive to End of southern road</div>
+    <div class="label">Travel Time</div><div class="value">5 min</div>
+    <div class="label">Spend Time</div><div class="value">30 min walk/pics</div>
+    <div class="label">Directions Start</div><div class="value">Jaslin Driving!</div>
+    <div class="label">Directions End</div><div class="value">River View/Photo Op.</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Drive to cheese stand/machine</div>
+    <div class="label">Travel Time</div><div class="value">15 min</div>
+    <div class="label">Spend Time</div><div class="value">15</div>
+    <div class="label">Directions Start</div><div class="value">(near Buchenbachfall picnic area)</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:30-ish?</div>
+    <div class="label">Activity</div><div class="value">Spissbach/Buchenbach Falls:</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">20-30 min</div>
+    <div class="label">Directions Start</div><div class="value">Relax and enjoy the view</div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6-7? DOH!</div>
+    <div class="label">Activity</div><div class="value">Dinner: ?</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+
+<!-- THURSDAY -->
+<div class="day" id="thu-7-2" style="display:none;">
+
+  <h2>Thursday 7/2 <BR> &nbsp&nbsp Lauterbrunnen</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8am</div>
+    <div class="label">Activity</div><div class="value">Breakfast</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">8:30am</div>
+    <div class="label">Activity</div><div class="value">Drive to Lake Lucern</div>
+    <div class="label">Travel Time</div><div class="value">1.5hr</div>
+    <div class="label">Spend Time</div><div class="value">10 min</div>
+    <div class="label">Directions Start</div><div class="value">(A8 Exit Bundesstrasse)</div>
+    <div class="label">Directions End</div><div class="value">Richard-Wagner-Weg 27</div>
+    <div class="label">Comments</div><div class="value">Photo Op: Wagner's House</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10:30am</div>
+    <div class="label">Activity</div><div class="value">Drive to: Zurich</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">11:30am</div>
+    <div class="label">Activity</div><div class="value">Return Car (Europcar) by NOON</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">(Closes @ noon for lunch hour)</div>
+    <div class="label">Directions End</div><div class="value">Josefstrasse 53</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">Noonish</div>
+    <div class="label">Activity</div><div class="value">Uber to Hotel: Limmathof (1n)</div>
+    <div class="label">Travel Time</div><div class="value">10 min ride</div>
+    <div class="label">Spend Time</div><div class="value">(Luggage Storage)</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Reservation:SB4-19C0288DD6</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">12:30pm</div>
+    <div class="label">Activity</div><div class="value">Predigerkirche Church</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">20 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1pm</div>
+    <div class="label">Activity</div><div class="value">Grossmünster Church</div>
+    <div class="label">Travel Time</div><div class="value">7 min walk</div>
+    <div class="label">Spend Time</div><div class="value">20 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">1:30pm</div>
+    <div class="label">Activity</div><div class="value">Fraumünster Church &amp; Square</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1hr</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">2:30pm</div>
+    <div class="label">Activity</div><div class="value">Lunch anywhere around here</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3pm</div>
+    <div class="label">Activity</div><div class="value">St. Peter Church</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">30 min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">3:30pm</div>
+    <div class="label">Activity</div><div class="value">Lindenhof Square Viewpoint</div>
+    <div class="label">Travel Time</div><div class="value">5 min walk</div>
+    <div class="label">Spend Time</div><div class="value">5 min photo Op</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4pm</div>
+    <div class="label">Activity</div><div class="value">Louis Vuitton &amp; Bahnhofstr. Shopping</div>
+    <div class="label">Travel Time</div><div class="value">6 min walk</div>
+    <div class="label">Spend Time</div><div class="value">1 minute</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4:30pm</div>
+    <div class="label">Activity</div><div class="value">Sprüngli Chocolates</div>
+    <div class="label">Travel Time</div><div class="value">1 min walk</div>
+    <div class="label">Spend Time</div><div class="value">10 hrs</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5pm</div>
+    <div class="label">Activity</div><div class="value">Versace? Dolce?</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">1 minute</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:30pm</div>
+    <div class="label">Activity</div><div class="value">Back to hotel</div>
+    <div class="label">Travel Time</div><div class="value">17 min from Musikpavillon</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">Or #4 tram from Bellevue stop by triangle. (across Quaibrücke bridge)</div>
+    <div class="label">Directions End</div><div class="value">Exit: Central (4 stops)</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">7pm</div>
+    <div class="label">Activity</div><div class="value">Last Euro Dinner: Weinstube 1923</div>
+    <div class="label">Travel Time</div><div class="value">1 min walk</div>
+    <div class="label">Spend Time</div><div class="value">In hotel</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value">Resv# 1674</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">FINAL PACK!</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+<!-- FRIDAY -->
+<div class="day" id="fri-7-3" style="display:none;">
+
+  <h2>Friday 7/3 <BR> &nbsp&nbsp Zurich/Munich/San Diego</h2>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">5:30am</div>
+    <div class="label">Activity</div><div class="value">Walk to Train Station</div>
+    <div class="label">Travel Time</div><div class="value">7 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6:05am</div>
+    <div class="label">Activity</div><div class="value">Train to Airport</div>
+    <div class="label">Travel Time</div><div class="value">9 min</div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value">IC8 Nonstop</div>
+    <div class="label">Directions End</div><div class="value">Zurich Airport</div>
+    <div class="label">Comments</div><div class="value">Get tix at station</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Airport Breakfast</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">9:30am</div>
+    <div class="label">Activity</div><div class="value">Fly to Munich</div>
+    <div class="label">Travel Time</div><div class="value">1hr</div>
+    <div class="label">Spend Time</div><div class="value">Seats 21 A, C, D</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">LH 5763</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">10:30am</div>
+    <div class="label">Activity</div><div class="value">Layover</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value">2hr 15min</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">12:40pm</div>
+    <div class="label">Activity</div><div class="value">Fly to San Diego</div>
+    <div class="label">Travel Time</div><div class="value">11hr 45min</div>
+    <div class="label">Spend Time</div><div class="value">Seats 29 H, J, K</div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value">LH 466</div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">4-5pm</div>
+    <div class="label">Activity</div><div class="value">Uber/Taxi home</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">6pm-ish</div>
+    <div class="label">Activity</div><div class="value">Pickup Ginger</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Kick Ginger</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Kick Ginger again</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Time</div><div class="value time">?</div>
+    <div class="label">Activity</div><div class="value">Laugh at kicking Ginger</div>
+    <div class="label">Travel Time</div><div class="value"></div>
+    <div class="label">Spend Time</div><div class="value"></div>
+    <div class="label">Directions Start</div><div class="value"></div>
+    <div class="label">Directions End</div><div class="value"></div>
+    <div class="label">Comments</div><div class="value"></div>
+  </div>
+
+</div>
+
+
+</body>
+</html>
