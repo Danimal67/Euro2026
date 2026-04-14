@@ -1,11 +1,18 @@
-const CACHE_NAME = "trip-v1";
+const CACHE_NAME = "trip-v2";
+const CORE_ASSETS = [
+  "/",
+  "/index.html"
+];
 
-// Install (basic setup)
+// Install → cache core files immediately
 self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS))
+  );
   self.skipWaiting();
 });
 
-// Activate (cleanup old caches)
+// Activate → clean old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -21,11 +28,21 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch (auto-cache EVERYTHING)
+// Fetch → cache everything else dynamically
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // If already cached → use it
-      if (response) {
-        return response;
-      }
+      if (response) return response;
+
+      return fetch(event.request).then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    }).catch(() => {
+      // Fallback to cached homepage if offline
+      return caches.match("/index.html");
+    })
+  );
+});
