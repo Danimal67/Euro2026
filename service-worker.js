@@ -1,35 +1,43 @@
-const CACHE_NAME = "trip-v2";
+const CACHE_NAME = "trip-v4";
 const CORE_ASSETS = [
   "/",
   "/index.html"
 ];
 
-// Install → cache core files immediately
+// INSTALL
 self.addEventListener("install", (event) => {
+  self.skipWaiting(); // activate immediately
+
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS))
   );
-  self.skipWaiting();
 });
 
-// Activate → clean old caches
+// ACTIVATE
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      )
-    )
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys.map(key => key !== CACHE_NAME && caches.delete(key))
+      );
+      await self.clients.claim(); // 🔥 TAKE CONTROL IMMEDIATELY
+    })()
   );
-  self.clients.claim();
 });
 
-// Fetch → cache everything else dynamically
+// FETCH
 self.addEventListener("fetch", (event) => {
+
+  // 🔥 Always handle navigation requests
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      caches.match("/index.html")
+    );
+    return;
+  }
+
+  // Cache-first for everything else
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) return response;
@@ -41,7 +49,6 @@ self.addEventListener("fetch", (event) => {
         });
       });
     }).catch(() => {
-      // Fallback to cached homepage if offline
       return caches.match("/index.html");
     })
   );
