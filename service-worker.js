@@ -1,55 +1,49 @@
-const CACHE_NAME = "trip-v4";
-const CORE_ASSETS = [
-  "/",
-  "/index.html"
-];
+const CACHE_NAME = "trip-app-v5"; // <-- bump this when you update anything
 
-// INSTALL
-self.addEventListener("install", (event) => {
+self.addEventListener("install", event => {
   self.skipWaiting(); // activate immediately
 
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll([
+        "./",
+        "./index.html"
+      ]);
+    })
   );
 });
 
-// ACTIVATE
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.map(key => key !== CACHE_NAME && caches.delete(key))
-      );
-      await self.clients.claim(); // 🔥 TAKE CONTROL IMMEDIATELY
-    })()
-  );
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
 });
 
-// FETCH
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", event => {
+  const request = event.request;
 
-  // 🔥 Always handle navigation requests
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      caches.match("/index.html")
-    );
-    return;
-  }
+  // Only handle GET requests
+  if (request.method !== "GET") return;
 
-  // Cache-first for everything else
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) return response;
+    caches.match(request).then(cached => {
+      if (cached) {
+        return cached; // 💥 instant load from cache
+      }
 
-      return fetch(event.request).then((networkResponse) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
+      return fetch(request)
+        .then(response => {
+          // Clone and store EVERY successful response (especially images)
+          const responseClone = response.clone();
+
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, responseClone);
+          });
+
+          return response;
+        })
+        .catch(() => {
+          // If offline and not cached, fallback to main page
+          return caches.match("./index.html");
         });
-      });
-    }).catch(() => {
-      return caches.match("/index.html");
     })
   );
 });
