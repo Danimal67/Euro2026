@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-app-v5"; // <-- bump this when you update anything
+const CACHE_NAME = "trip-app-v6"; // <-- bump this when you update anything
 
 self.addEventListener("install", event => {
   self.skipWaiting(); // activate immediately
